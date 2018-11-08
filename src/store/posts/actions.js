@@ -7,7 +7,7 @@
 
 import _ from 'lodash';
 import * as types from './actionTypes';
-import redditService from '../../services/reddit';
+import redditService from '../../services/gitApi';
 import * as topicsSelectors from '../topics/reducer';
 
 export function fetchPosts() {

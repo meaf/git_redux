@@ -7,14 +7,17 @@
 
 import _ from 'lodash';
 import * as types from './actionTypes';
-import redditService from '../../services/reddit';
+import redditService from '../../services/gitApi';
 import * as topicsSelectors from './reducer';
 import * as postActions from '../posts/actions';
 
 export function fetchTopics() {
     return async(dispatch, getState) => {
         try {
+            console.log(1);
             const subredditArray = await redditService.getDefaultSubreddits();
+            console.log(3);
+
             const topicsByUrl = _.keyBy(subredditArray, (subreddit) => subreddit.url);
             dispatch({ type: types.TOPICS_FETCHED, topicsByUrl });
         } catch (error) {

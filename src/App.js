@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as topicsSelectors from './store/topics/reducer';
-import TopicsScreen from './containers/TopicsScreen';
-import PostsScreen from './containers/PostsScreen';
 import './App.css';
+import ReposScreen from "./containers/ReposScreen";
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                {!this.props.isSelectionFinalized ?
-                    <TopicsScreen /> :
-                    <PostsScreen />
-                }
+                <ReposScreen />
             </div>
         );
     }
@@ -21,7 +16,7 @@ class App extends Component {
 // which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
     return {
-        isSelectionFinalized: topicsSelectors.isTopicSelectionFinalized(state)
+        //isSelectionFinalized: topicsSelectors.isTopicSelectionFinalized(state)
     };
 }
 

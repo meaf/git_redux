@@ -1,5 +1,5 @@
-import topics from './topics/reducer';
+import repos from './repos/reducer';
 
 export {
-  topics
+    repos
 };

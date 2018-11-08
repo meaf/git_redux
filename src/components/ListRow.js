@@ -14,7 +14,7 @@ export default class ListRow extends Component {
     }
 
     onClick() {
-        this.props.onClick(this.props.rowId);
+        this.props.onClick(this.props.id);
     }
 
 }

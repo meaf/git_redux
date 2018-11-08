@@ -17,7 +17,7 @@ export default class ListView extends Component {
     render() {
         return (
             <ul>
-                {_.map(this.props.rowsIdArray, this.renderRowById)}
+                {_.map(this.props.id, this.renderRowById)}
             </ul>
         );
     }
