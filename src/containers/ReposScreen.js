@@ -66,8 +66,7 @@ class ReposScreen extends Component {
 
     onApplyUserClick() {
         this.props.dispatch(reposActions.applyUser(this.refs.search.value));
-        //const request = fetchRepos();
-        //const data = await request;
+        this.props.dispatch(fetchRepos());
     }
 
 }

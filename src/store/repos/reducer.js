@@ -33,5 +33,6 @@ export function getReposList(state){
 }
 
 export function getUserName(state) {
-    return state.repos.username;
+    debugger;
+    return state.repos.currentUser;
 }

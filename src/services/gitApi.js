@@ -9,8 +9,8 @@ const GIT_ENDPOINT = 'https://api.github.co';
 
 class GitService {
 
-    async getUserRepos() {
-        const username = getUserName();
+    async getUserRepos(username) {
+        debugger;
         const url = `${GIT_ENDPOINT}/users/${username}/repos`;
         const response = await fetch(url, {
             method: 'GET',

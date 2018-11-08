@@ -11,12 +11,13 @@ import * as topicsSelectors from './reducer';
 import gitService from '../../services/gitApi';
 
 export function fetchRepos() {
-    console.log('fetching');
     return async(dispatch, getState) => {
         try {
-            const username = topicsSelectors.getUserName(getState());
+            console.log('fetching');
+            const username = await topicsSelectors.getUserName(getState());
             const fetchPromises = gitService.getUserRepos(username);
             const topicPosts = await fetchPromises;
+            console.log('fetched');
             // hint
             const reposById = _.keyBy(_.flatten(topicPosts), (post) => post.id);
             dispatch({ type: types.REPOS_FETCHED, reposById });
