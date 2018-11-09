@@ -31,7 +31,6 @@ class ReposScreen extends Component {
     }
 
     getContent() {
-        debugger;
         if(!this.props.userName)
             return <h1>Go ahead, enter username and search!</h1>;
         if(!this.props.reposList)
