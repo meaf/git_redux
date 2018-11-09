@@ -5,22 +5,16 @@
 
 import _ from 'lodash';
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
 import ListRow from "./ListRow";
 
 export default class ListView extends Component {
 
-    constructor(props) {
-        super(props);
-        autoBind(this);
-    }
-
     render() {
-        return <ul>{_.map(this.props.reposList, this.renderRow)}</ul>
-    }
-
-    renderRow(repo) {
-        return <ListRow repo={repo}/>;
+        return (<ul>
+                    {Object.keys(this.props.reposList)
+                        .map(k => this.props.reposList[k])
+                        .map(repo => <ListRow repo={repo}/>)}
+                </ul>)
     }
 
 }
