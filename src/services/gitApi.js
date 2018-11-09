@@ -3,14 +3,12 @@
 // normally, our interface to any sort of server API will be as a service
 
 import _ from 'lodash';
-import { getUserName } from '../store/repos/reducer'
 
-const GIT_ENDPOINT = 'https://api.github.co';
+const GIT_ENDPOINT = 'https://api.github.com';
 
 class GitService {
 
     async getUserRepos(username) {
-        debugger;
         const url = `${GIT_ENDPOINT}/users/${username}/repos`;
         const response = await fetch(url, {
             method: 'GET',
@@ -23,15 +21,16 @@ class GitService {
         }
         const data = await response.json();
         if (!data) {
-            throw new Error(`RedditService getDefaultSubreddits failed, children not returned`);
+            throw new Error(`GitService failed, children not returned`);
         }
-        return _.map(data, (subreddit) => {
+        console.log(data);
+        return _.map(data, (repo) => {
             // abstract away the specifics of the reddit API response and take only the fields we care about
             return {
-                name: _.get(subreddit, 'data.name'),
-                fullname: _.get(subreddit, 'data.full_name'),
-                url: _.get(subreddit, 'data.html_url'),
-                watchers: _.get(subreddit, 'data.watchers')
+                id: _.get(repo, 'id'),
+                name: _.get(repo, 'name'),
+                url: _.get(repo, 'html_url'),
+                watchers: _.get(repo, 'watchers')
             }
         });
     }

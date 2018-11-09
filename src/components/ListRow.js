@@ -2,19 +2,17 @@ import React, { Component } from 'react';
 
 export default class ListRow extends Component {
 
+    constructor(props){
+        super(props);
+    }
+
     render() {
-        const backgroundColor = this.props.selected ? '#c0f0ff' : '#fff';
         return (
-            <div
-                style={{ backgroundColor }}
-                onClick={this.onClick.bind(this)}>
-                {this.props.children}
-            </div>
+            <li>
+                <p>
+                    <a href={this.props.repo.url}>{this.props.repo.name} </a>
+                    Watchers: <b>{this.props.repo.watchers}</b></p>
+            </li>
         );
     }
-
-    onClick() {
-        this.props.onClick(this.props.id);
-    }
-
 }

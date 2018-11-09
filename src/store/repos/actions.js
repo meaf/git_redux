@@ -13,14 +13,11 @@ import gitService from '../../services/gitApi';
 export function fetchRepos() {
     return async(dispatch, getState) => {
         try {
-            console.log('fetching');
-            const username = await topicsSelectors.getUserName(getState());
-            const fetchPromises = gitService.getUserRepos(username);
-            const topicPosts = await fetchPromises;
-            console.log('fetched');
-            // hint
-            const reposById = _.keyBy(_.flatten(topicPosts), (post) => post.id);
-            dispatch({ type: types.REPOS_FETCHED, reposById });
+            const username = topicsSelectors.getUserName(getState());
+            const topicPosts = await gitService.getUserRepos(username);
+            const reposList = _.keyBy(_.flatten(topicPosts), (post) => post.id);
+            console.log(topicPosts);
+            dispatch({ type: types.REPOS_FETCHED, reposList});
         } catch (error) {
             console.error(error);
         }

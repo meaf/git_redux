@@ -6,9 +6,8 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
-import ListRow from "./ListRow";
 
-export default class ListView extends Component {
+export default class SearchPanel extends Component {
 
     constructor(props) {
         super(props);
@@ -16,11 +15,16 @@ export default class ListView extends Component {
     }
 
     render() {
-        return <ul>{_.map(this.props.reposList, this.renderRow)}</ul>
-    }
-
-    renderRow(repo) {
-        return <ListRow repo={repo}/>;
+        return (
+            <div>
+                <button className="button"
+                        onClick={this.props.onClick}>
+                    Find
+                </button>
+                <input ref="search"
+                       type="text"/>
+            </div>
+        );
     }
 
 }

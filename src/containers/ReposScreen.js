@@ -1,83 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './TopicsScreen.css';
 import * as reposActions from '../store/repos/actions';
+import * as reposSelectors from '../store/repos/reducer';
 import ListView from '../components/ListView';
-import ListRow from '../components/ListRow';
 import {fetchRepos} from "../store/repos/actions";
+import SearchPanel from "../components/SearchPanel";
 
 class ReposScreen extends Component {
 
     constructor() {
         super();
-        this.state = {
-            username: undefined
-        };
-        this.handleChange = this.handleChange.bind(this);
         this.onApplyUserClick = this.onApplyUserClick.bind(this);
-
+        this.getContent = this.getContent.bind(this);
     }
 
     render() {
-       // if (!this.reposList) return this.renderLoading();
+        const content = this.getContent();
         return (
             <div className="ReposScreen">
-                <div>
-                    <button className="button"
-                        onClick={this.onApplyUserClick.bind(this)}>
-                    Find
-                </button>
-                <input ref="search"
-                       type="text"
-                       id="searchbutton"
-                       onChange={ this.handleChange }/>
-                </div>
-              <ListView
-                    idsList={this.props.idsList}
-                    reposList={this.props.reposList}
-                    renderRow={this.renderRow.bind(this)} />
+              <SearchPanel onClick={this.onApplyUserClick.bind(this)}
+                           ref='panel'/>
+                {content}
             </div>
-        //hint
         );
     }
 
-    handleChange({ target }) {
-//        this.setState({
-  //          [target.name]: target.value
-    //    });
-    }
-
-    renderRow(rowId, row) {
-        const selected = this.props.selectedIdsMap[rowId];
-        return (
-            <ListRow
-                rowId={rowId}
-                onClick={this.onRowClick.bind(this)}
-                selected={selected}>
-                <h3>{row.title}</h3>
-                <p>{row.description}</p>
-            </ListRow>
-        )
-    }
-
-    onRowClick(rowId) {
-        this.props.dispatch(reposActions.selectTopic(rowId));
-    }
-
     onApplyUserClick() {
-        this.props.dispatch(reposActions.applyUser(this.refs.search.value));
+        this.props.dispatch(reposActions.applyUser(this.refs.panel.refs.search.value));
         this.props.dispatch(fetchRepos());
     }
 
+    getContent() {
+        debugger;
+        if(!this.props.userName)
+            return <h1>Go ahead, enter username and search!</h1>;
+        if(!this.props.reposList)
+            return <h1>User not found:(</h1>;
+        return <ListView reposList={this.props.reposList}/>
+    }
 }
 
 // which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
-    console.log(state);
-
     return {
-        //idsList: repoSelectors.getIdsList(state),
-        //reposList: repoSelectors.getReposList(state)
+        reposList: reposSelectors.getReposList(state),
+        userName: reposSelectors.getUserName(state)
     };
 }
 
