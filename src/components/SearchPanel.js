@@ -5,14 +5,8 @@
 
 import _ from 'lodash';
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
 
 export default class SearchPanel extends Component {
-
-    constructor(props) {
-        super(props);
-        autoBind(this);
-    }
 
     render() {
         return (
